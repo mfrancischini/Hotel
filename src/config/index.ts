@@ -35,7 +35,7 @@ export interface Config {
 const config: Config = {
   openai: {
     apiKey: process.env.OPENAI_API_KEY || '',
-    model: process.env.OPENAI_MODEL || 'gpt-4-turbo-preview',
+    model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
   },
   hotel: {
     name: process.env.HOTEL_NAME || 'Hotel Luxe',
