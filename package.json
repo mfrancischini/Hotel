@@ -1,0 +1,42 @@
+{
+  "name": "hotel-chatbot",
+  "version": "1.0.0",
+  "description": "Intelligent WhatsApp chatbot for hotel reservations",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "server": "ts-node src/server.ts",
+    "server:build": "tsc && node dist/server.js",
+    "dev": "ts-node src/app.ts",
+    "dev:server": "ts-node src/server.ts",
+    "dev:watch": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "example": "ts-node src/example.ts",
+    "lint": "eslint src --ext .ts",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "chatbot",
+    "whatsapp",
+    "hotel",
+    "reservations",
+    "nodejs",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "openai": "^4.40.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^20.10.6",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  }
+}

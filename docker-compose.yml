@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  chatbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hotel-chatbot
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - HOTEL_NAME=${HOTEL_NAME:-Hotel Luxe}
+      - HOTEL_PHONE=${HOTEL_PHONE:-+34-900-123-456}
+      - HOTEL_EMAIL=${HOTEL_EMAIL:-reservas@hotelluxe.com}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - CONTEXT_STORAGE=local
+      - CONTEXT_TTL=3600
+    volumes:
+      - ./src:/app/src
+      - ./logs:/app/logs
+    networks:
+      - chatbot-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+  # Opcional: Redis para almacenamiento distribuido
+  redis:
+    image: redis:7-alpine
+    container_name: hotel-chatbot-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - chatbot-network
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  chatbot-network:
+    driver: bridge
+
+volumes:
+  redis-data:
