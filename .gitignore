@@ -9,3 +9,5 @@ dist/
 *.swp
 *.swo
 coverage/
+src/config/google-credentials.json
+src/config/*.json
